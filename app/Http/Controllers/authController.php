@@ -155,4 +155,27 @@ class authController extends Controller
             abort(404);
         }
     }  
+
+
+    // page profil 
+    public function showProfil()
+    {
+        $user = Auth::user();
+
+        // $preferences = Preference::where('user_id', $user->id)->get();
+        
+        // $categories = [];
+        
+        // foreach ($preferences as $preference) {
+        //     $categoryId = $preference->category_id;
+        
+        //     $category = Categories::find($categoryId);
+        
+        //     if ($category) {
+        //         $categories[] = $category;
+        //     }
+        // }
+        
+        return view('Auth.profil', compact('user'));
+    }
 }
