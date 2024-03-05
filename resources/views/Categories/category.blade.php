@@ -4,7 +4,8 @@
     <h1 class="text-4xl text-blue-800 py-4 text-center font-bold"></h1>
 
     <!-- form pour add Categories -->
-    <form action="" method="post">
+    <form action="{{ route('category.add') }}" method="post">
+    @csrf
     <div class="bg-white p-10 rounded-lg shadow md:w-3/4 mx-auto lg:w-1/2 border-2">
         <div>
             <div class="mb-5">
@@ -30,47 +31,31 @@
     <h1 class="text-4xl text-blue-800 py-10 text-center font-bold">Categories disponibles</h1>
         
     <div class="flex flex-wrap text-center gap-10 mt-10 justify-center">
-        <div class="w-full max-w-sm overflow-hidden rounded-lg border-2 bg-white shadow-md duration-300 hover:scale-105 hover:shadow-xl"> 
-            <form action="" method="post"> 
-        <input name="name" class="mt-2 text-center text-2xl font-bold text-gray-500" value="zzzzzzzzzzz"/>
-        <p class="my-4 text-center text-sm text-gray-500">Disponible depuis :</p>
-        <div class="space-x-4 bg-gray-100 py-4 flex justify-center text-center">
-
-        <button type="submit" name="modifier" class="inline-block rounded-md bg-green-500 px-6 py-2 font-semibold text-green-100 shadow-md duration-75 hover:bg-green-400">Modifier</button>
-        </form> 
-
-        <form action="" method="post">
-        <button type="submit" name="supprimer" class="inline-block rounded-md bg-red-500 px-10 py-2 font-semibold text-red-100 shadow-md duration-75 hover:bg-red-400">Supprimer</button>
-        </form> 
-        </div>
+        @forelse ($categories as $category)
 
         <div class="w-full max-w-sm overflow-hidden rounded-lg border-2 bg-white shadow-md duration-300 hover:scale-105 hover:shadow-xl"> 
-            <form action="" method="post"> 
-        <input name="name" class="mt-2 text-center text-2xl font-bold text-gray-500" value="zzzzzzzzzzz"/>
-        <p class="my-4 text-center text-sm text-gray-500">Disponible depuis :</p>
+            <form action="{{ route('category.edit') }}" method="post"> 
+            @csrf
+            @method('PUT')
+            <input type="hidden" name="categoryId" value="{{ $category['id'] }}">
+        <input name="name" class="mt-2 text-center text-2xl font-bold text-gray-500" value="{{ $category['name'] }}"/>
+        <p class="my-4 text-center text-sm text-gray-500">Disponible depuis :{{ $category['created_at'] }}</p>
         <div class="space-x-4 bg-gray-100 py-4 flex justify-center text-center">
 
-        <button type="submit" name="modifier" class="inline-block rounded-md bg-green-500 px-6 py-2 font-semibold text-green-100 shadow-md duration-75 hover:bg-green-400">Modifier</button>
+        <button type="submit" name="modifier" class="inline-block rounded-md bg-green-500 px-6 py-2 font-semibold text-black shadow-md duration-75 hover:bg-green-400">Modifier</button>
         </form> 
 
-        <form action="" method="post">
-        <button type="submit" name="supprimer" class="inline-block rounded-md bg-red-500 px-10 py-2 font-semibold text-red-100 shadow-md duration-75 hover:bg-red-400">Supprimer</button>
-        </form> 
-        </div>
-
-        <div class="w-full max-w-sm overflow-hidden rounded-lg border-2 bg-white shadow-md duration-300 hover:scale-105 hover:shadow-xl"> 
-            <form action="" method="post"> 
-        <input name="name" class="mt-2 text-center text-2xl font-bold text-gray-500" value="zzzzzzzzzzz"/>
-        <p class="my-4 text-center text-sm text-gray-500">Disponible depuis :</p>
-        <div class="space-x-4 bg-gray-100 py-4 flex justify-center text-center">
-
-        <button type="submit" name="modifier" class="inline-block rounded-md bg-green-500 px-6 py-2 font-semibold text-green-100 shadow-md duration-75 hover:bg-green-400">Modifier</button>
-        </form> 
-
-        <form action="" method="post">
-        <button type="submit" name="supprimer" class="inline-block rounded-md bg-red-500 px-10 py-2 font-semibold text-red-100 shadow-md duration-75 hover:bg-red-400">Supprimer</button>
+        <form action="{{ route('category.delete') }}" method="post">
+            @csrf
+            @method('DELETE')
+            <input type="hidden" name="categoryId" value="{{ $category['id'] }}">
+            <button type="submit" name="supprimer" class="inline-block rounded-md bg-red-500 px-10 py-2 font-semibold text-black shadow-md duration-75 hover:bg-red-400">Supprimer</button>
         </form> 
         </div>
+        @empty
+        <p>No categories Found</p>
+        @endforelse
+
 
   
     </div>  
