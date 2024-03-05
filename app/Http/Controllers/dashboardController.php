@@ -11,6 +11,6 @@ class dashboardController extends Controller
     {
         // $userId = Auth::id();
         // dd($userId);
-        return view('dashboard');
+        return view('Stats.dashboard');
     }
 }
