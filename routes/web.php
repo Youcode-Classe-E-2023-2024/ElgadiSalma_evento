@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\authController;
 use App\Http\Controllers\dashboardController;
+use App\Http\Controllers\categoryController;
 
 
 /*
@@ -25,5 +26,9 @@ Route::get('/forgot-password', [authController::class, 'forgot_show']);
 Route::get('/reset-password/{token}', [authController::class, 'reset'])->name('reset');
 Route::post('/reset-password/{token}', [authController::class, 'post_reset'])->name('post_reset');
 
+Route::get('/profil', [authController::class,'showProfil'])->name('profil');
+
 
 Route::get('/dashboard', [dashboardController::class,'dashboardView'])->name('dashboard.view');
+
+Route::get('/category', [categoryController::class,'categoryView'])->name('category.view');
