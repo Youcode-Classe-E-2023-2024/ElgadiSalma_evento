@@ -32,3 +32,4 @@ Route::get('/profil', [authController::class,'showProfil'])->name('profil');
 Route::get('/dashboard', [dashboardController::class,'dashboardView'])->name('dashboard.view');
 
 Route::get('/category', [categoryController::class,'categoryView'])->name('category.view');
+Route::post('/category', [categoryController::class,'addCategory'])->name('category.add');
