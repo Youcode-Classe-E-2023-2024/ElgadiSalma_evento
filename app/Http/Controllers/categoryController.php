@@ -26,4 +26,28 @@ class categoryController extends Controller
         return redirect('/category');
     }
 
+    public function editCategory(Request $request)
+    {
+        $validated = request()->validate([
+            'name' => 'required',
+        ]);
+
+        $categoryId = $request->input('categoryId');
+
+        $category = Category::findOrFail($categoryId);
+        $category->update($validated);
+
+        return redirect('/category');
+    }
+
+    public function deleteCategory(Request $request)
+    {
+        $categoryId = $request->input('categoryId');
+
+        $category = Category::findOrFail($categoryId);
+        $category->delete();
+
+        return redirect('/category');
+    }
+
 }
