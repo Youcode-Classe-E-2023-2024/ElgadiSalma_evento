@@ -33,3 +33,5 @@ Route::get('/dashboard', [dashboardController::class,'dashboardView'])->name('da
 
 Route::get('/category', [categoryController::class,'categoryView'])->name('category.view');
 Route::post('/category', [categoryController::class,'addCategory'])->name('category.add');
+Route::put('/category', [categoryController::class,'editCategory'])->name('category.edit');
+Route::delete('/category', [categoryController::class,'deleteCategory'])->name('category.delete');
