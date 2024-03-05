@@ -17,7 +17,7 @@ class authController extends Controller
 {
     public function registerView()
     {
-        return view('register');
+        return view('Auth.register');
     }
     public function register(Request $request)
     {
@@ -56,13 +56,13 @@ class authController extends Controller
             $user->save();
         }
 
-        return view('register');
+        return view('Auth.register');
     }
 
 
     public function loginView()
     {
-        return view('login');
+        return view('Auth.login');
     }
     public function login(Request $request)
     {
@@ -97,7 +97,7 @@ class authController extends Controller
     // forgot password
     public function forgot_show()
     {
-        return view('forgot-password');
+        return view('Auth.forgot-password');
     }
     public function reset($token)
     {
@@ -106,7 +106,7 @@ class authController extends Controller
         if (!empty($user)) {
             $data['user'] = $user;
             $data['token'] = $token; // Pass the token to the view
-            return view('reset-password', $data);
+            return view('Auth.reset-password', $data);
         } else {
             abort(404);
         }
@@ -161,21 +161,6 @@ class authController extends Controller
     public function showProfil()
     {
         $user = Auth::user();
-
-        // $preferences = Preference::where('user_id', $user->id)->get();
-        
-        // $categories = [];
-        
-        // foreach ($preferences as $preference) {
-        //     $categoryId = $preference->category_id;
-        
-        //     $category = Categories::find($categoryId);
-        
-        //     if ($category) {
-        //         $categories[] = $category;
-        //     }
-        // }
-        
         return view('Auth.profil', compact('user'));
     }
 }
