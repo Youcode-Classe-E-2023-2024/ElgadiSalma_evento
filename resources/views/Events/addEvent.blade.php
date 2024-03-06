@@ -18,6 +18,9 @@
                 <label for="titre" class="mb-3 block text-base font-medium text-[#07074D]">
                     Titre 
                 </label>
+                @error('title')
+                    <div class="text-red-500">{{ $message }}</div>
+                @enderror
                 <input type="text" name="title" placeholder="Titre" class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" >
                 </div>
             </div>
@@ -27,6 +30,9 @@
                     <label for="media" class="mb-3 block text-base font-medium ">
                         Category 
                     </label>
+                    @error('category')
+                        <div class="text-red-500">{{ $message }}</div>
+                    @enderror
                     <div class="rounded-md border border-[#e0e0e0] p-1 py-1 bg-white outline-none flex">
                         <select class="rounded w-full pb-2 py-2 px-4 placeholder-gray-500 outline-none" name="category" id="">
                             @foreach($categories as $category)
@@ -45,6 +51,9 @@
                 <label for="titre" class="mb-3 block text-base font-medium text-[#07074D]">
                     Prix 
                 </label>
+                @error('price')
+                    <div class="text-red-500">{{ $message }}</div>
+                @enderror
                 <input type="number" name="price" placeholder="Prix" class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" >
                 </div>
             </div>
@@ -54,6 +63,9 @@
                     <label for="media" class="mb-3 block text-base font-medium ">
                         Lieu 
                     </label>
+                    @error('lieu')
+                        <div class="text-red-500">{{ $message }}</div>
+                    @enderror
                     <div class="rounded-md border border-[#e0e0e0] p-1 py-1 bg-white outline-none flex">
                         <select class="rounded w-full pb-2 py-2 px-4 placeholder-gray-500 outline-none" name="lieu" id="">
                             @foreach($cities as $city)
@@ -69,6 +81,9 @@
                     <label for="media" class="mb-3 block text-base font-medium ">
                         Nombre de place 
                     </label>
+                    @error('place')
+                        <div class="text-red-500">{{ $message }}</div>
+                    @enderror
                     <input type="number" name="place" placeholder="Nombre de place" class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" >      
                     </div>
                 </div>    
@@ -79,6 +94,9 @@
           <label class="mb-3 block text-base font-medium text-[#07074D]">
             Description
           </label>
+            @error('description')
+                <div class="text-red-500">{{ $message }}</div>
+            @enderror
           <input
             type="text"
             name="description"
@@ -95,6 +113,9 @@
                     <label class="mb-3 block text-base font-medium text-[#07074D]">
                         Image
                       </label>
+                        @error('image')
+                            <div class="text-red-500">{{ $message }}</div>
+                        @enderror
                       <input
                         type="file"
                         name="image[]"
@@ -110,6 +131,9 @@
                     <label for="media" class="mb-3 block text-base font-medium ">
                         Date de l'evenement 
                     </label>
+                    @error('deadline')
+                        <div class="text-red-500">{{ $message }}</div>
+                    @enderror
                         <input
                         type="date"
                         name="deadline"

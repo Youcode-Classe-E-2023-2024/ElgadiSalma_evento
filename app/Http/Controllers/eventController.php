@@ -7,6 +7,7 @@ use App\Models\Event;
 use App\Models\Lieu;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class eventController extends Controller
 {
@@ -19,7 +20,7 @@ class eventController extends Controller
 
     public function addEvent(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'title' => 'required',
             'description' => 'required',
             'price' => 'required',
@@ -28,9 +29,11 @@ class eventController extends Controller
             'category' => 'required',
             'image' =>'required',
             'deadline' => 'required',
-
         ]);
 
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
         // dd($request);
         $user = Auth::user();
 
