@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->string('image');
+            $table->bigInteger('id_image')->nullable();
             $table->bigInteger('ville_id');
             $table->bigInteger('price');
             $table->tinyInteger('status')->default(0);
