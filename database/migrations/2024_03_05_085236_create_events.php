@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->string('image');
-            $table->string('lieu');
+            $table->bigInteger('ville_id');
             $table->bigInteger('price');
             $table->tinyInteger('status')->default(0);
             $table->tinyInteger('acceptation')->default(0);            
@@ -25,6 +25,11 @@ return new class extends Migration
             $table->bigInteger('category_id');
             $table->dateTime('deadline');
             $table->timestamps();
+
+            $table->foreign('ville_id')->references('id')->on('lieu')->onDelete('cascade');
+            // $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
+
         });
     }
 
