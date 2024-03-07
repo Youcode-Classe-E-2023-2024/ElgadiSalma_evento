@@ -20,6 +20,23 @@ class Event extends Model implements HasMedia
         'nombre_place',
         'ville_id',
         'deadline',
-        'category_id'
+        'category_id',
+        'acceptation',
+        'status'
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(Lieu::class, 'ville_id');
+    }
+
+    public function createdBy()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
