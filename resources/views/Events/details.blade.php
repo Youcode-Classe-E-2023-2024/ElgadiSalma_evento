@@ -12,10 +12,12 @@ use Carbon\Carbon;
         <div class="flex flex-wrap w-full gap-10 justify-center">
             <div class="flex w-2/3 justify-between">
                 <div class="flex gap-2 ">
-                    <img src=""
+                    @foreach ($event->createdBy->getMedia() as $mediaItem)
+                    <img src="{{ $mediaItem->getUrl() }}"
                         class="h-10 w-10 rounded-full object-cover" />
+                    @endforeach
                     <div>
-                        <p class="font-semibold text-gray-800 text-sm">{{ $event->user }}</p>
+                        <p class="font-semibold text-gray-800 text-sm">{{ $event->createdBy->name }}</p>
                         <p class="font-semibold text-gray-700 text-xs">{{ Carbon::parse( $event->created_at )->diffForHumans() }}</p>
                     </div>
                 </div>
