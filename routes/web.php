@@ -57,3 +57,20 @@ Route::delete('/category', [categoryController::class,'deleteCategory'])->name('
 Route::get('/addEvent', [eventController::class,'addEventView'])->name('addEvent.view');
 Route::post('/addEvent', [eventController::class,'addEvent'])->name('addEvent.add');
 
+/*
+|--------------------------------------------------------------------------
+|  displayEvent
+|--------------------------------------------------------------------------
+*/
+Route::get('/events', [eventController::class,'eventView'])->name('event.view');
+Route::get('/details/{id}', [eventController::class,'getEventById'])->name('event.details');
+
+
+/*
+|--------------------------------------------------------------------------
+|  Approuve Event cote admin
+|--------------------------------------------------------------------------
+*/
+Route::get('/event', [eventController::class,'adminEventView'])->name('adminEvent.view');
+Route::post('/event/{id}', [eventController::class,'approuveEvent'])->name('approuve.events');
+Route::delete('/event/{id}', [eventController::class,'desapprouveEvent'])->name('desapprouve.events');

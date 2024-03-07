@@ -144,6 +144,10 @@
                 </div>    
             </div>   
         </div>
+        <div class="mb-4 flex items-center">
+            <input type="checkbox" id="validation" name="validation" class="text-blue-500">
+            <label for="validation" class="text-gray-600 ml-2">Validation manuelle</label>
+          </div>
 
         <div class="my-10">
           <button type="submit" name="submit" class="hover:shadow-form rounded-md bg-gray-100 py-3 px-8 text-center text-base font-semibold w-full border-2 outline-none">

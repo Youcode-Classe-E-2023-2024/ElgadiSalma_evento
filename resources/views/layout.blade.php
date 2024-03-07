@@ -33,8 +33,10 @@
                     <!-- Nav Links -->
                     <ul class="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
 
-                    <li><a class="hover:text-gray-200" href="/dashboard">Home</a></li>
-                    <li><a class="hover:text-gray-200" href="/addEvent">ADD Event</a></li>
+                        <li><a class="hover:text-gray-200" href="/dashboard">Dashboard</a></li>
+                        <li><a class="hover:text-gray-200" href="/events">Home</a></li>
+                        <li><a class="hover:text-gray-200" href="/addEvent">ADD Event</a></li>
+                        <li><a class="hover:text-gray-200" href="/event">Events</a></li>
 
                     {{-- <li><a class="hover:text-gray-200" href="">Permissions</a></li>
                     <li><a class="hover:text-gray-200" href="">Subscribers</a></li>
