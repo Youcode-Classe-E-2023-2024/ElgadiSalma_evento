@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Event;
 use App\Models\Lieu;
 use App\Models\Category;
+use App\Models\Reservation;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -72,7 +73,15 @@ class eventController extends Controller
     public function getEventById($id)
     {
         $event = Event::with('category', 'city', 'createdBy')->find($id);
-        return view('Events.details', compact('event'));
+        $reservationsCount = Reservation::where('event_id', $id)->where('status', 1)->count();
+        $placesMax = $event->nombre_place;
+        if ($reservationsCount >= $placesMax) {
+            $placesRestantes = 0;
+        }else
+        {
+            $placesRestantes = 1;
+        }
+        return view('Events.details', compact('event','placesRestantes'));
     }
 
 

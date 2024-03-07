@@ -23,11 +23,11 @@ return new class extends Migration
             $table->bigInteger('created_by');
             $table->bigInteger('nombre_place');
             $table->bigInteger('category_id');
-            $table->dateTime('deadline');
+            $table->string('deadline');
             $table->timestamps();
 
             $table->foreign('ville_id')->references('id')->on('lieu')->onDelete('cascade');
-            // $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade'); 
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
 
         });

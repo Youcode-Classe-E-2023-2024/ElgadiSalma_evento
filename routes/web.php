@@ -5,6 +5,7 @@ use App\Http\Controllers\authController;
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\categoryController;
 use App\Http\Controllers\eventController;
+use App\Http\Controllers\reservationController;
 
 
 /*
@@ -74,3 +75,11 @@ Route::get('/details/{id}', [eventController::class,'getEventById'])->name('even
 Route::get('/event', [eventController::class,'adminEventView'])->name('adminEvent.view');
 Route::post('/event/{id}', [eventController::class,'approuveEvent'])->name('approuve.events');
 Route::delete('/event/{id}', [eventController::class,'desapprouveEvent'])->name('desapprouve.events');
+
+
+/*
+|--------------------------------------------------------------------------
+|  reserver event
+|--------------------------------------------------------------------------
+*/
+Route::post('/reservation', [reservationController::class,'reserverEvent'])->name('reserver.event');

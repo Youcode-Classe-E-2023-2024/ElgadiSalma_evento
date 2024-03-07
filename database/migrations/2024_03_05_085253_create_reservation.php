@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('reservation', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id');
+            $table->string('email');
             $table->bigInteger('event_id');
             $table->tinyInteger('status')->default(0);
             $table->timestamps();
