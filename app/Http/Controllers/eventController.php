@@ -14,7 +14,7 @@ class eventController extends Controller
     public function addEventView()
     {
         $cities = Lieu::all();
-        $categories = Category::all();
+        $categories = Category::all();  
         return view('Events.addEvent', compact('cities','categories'));
     }
 
@@ -36,6 +36,7 @@ class eventController extends Controller
         }
         // dd($request);
         $user = Auth::user();
+        $acceptation = $request->has('validation') ? 1 : 0;
 
         $event = Event::create([
             'title' => $request->input('title'),
@@ -47,6 +48,7 @@ class eventController extends Controller
             'category_id' => $request->input('category'),
             'deadline' => $request->input('deadline'),
             'created_by' => $user->id,
+            'acceptation' => $acceptation,
         ]);
 
         foreach ($request->file('image') as $file) {
@@ -60,6 +62,46 @@ class eventController extends Controller
 
         return redirect()->route('addEvent.view')->with('success', 'Evenement bien ajoutée.');
     }
-    
+    public function eventView()
+    {
+        $events = Event::with('category', 'city', 'createdBy')->where('status', 1)->get();
+        // dd($events->);
+        return view('Events.events', compact('events'));
+    }
 
+    public function getEventById($id)
+    {
+        $event = Event::with('category', 'city', 'createdBy')->find($id);
+        return view('Events.details', compact('event'));
+    }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    |  Admin
+    |--------------------------------------------------------------------------
+    */
+
+    public function adminEventView()
+    {
+        $events = Event::with('category', 'city', 'createdBy')
+        ->where('status', 0)
+        ->get();        // dd($events->);
+        return view('Admin.event', compact('events'));    
+    }
+
+    public function approuveEvent(Request $request, $id)
+    {
+        $event = Event::findOrFail($id);
+        $event->update(['status' => 1]);
+
+        return redirect()->route('adminEvent.view')->with('success', 'Evenement bien ajoutée.');
+    }
+    public function desapprouveEvent(Request $request, $id)
+    {
+        $event = Event::findOrFail($id);
+        $event->delete();
+
+        return redirect()->route('adminEvent.view')->with('success', 'Evenement bien ajoutée.');
+    }
 }
