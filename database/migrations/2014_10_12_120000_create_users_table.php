@@ -22,8 +22,6 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
 
-            $table->foreign('role')->references('id')->on('roles')->onDelete('cascade');
-
         });
     }
 
