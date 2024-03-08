@@ -32,17 +32,16 @@
                     </a>
                     <!-- Nav Links -->
                     <ul class="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
-
+                      @if(Auth::user()->hasRole('Administrateur'))
                         <li><a class="hover:text-gray-200" href="/dashboard">Dashboard</a></li>
-                        <li><a class="hover:text-gray-200" href="/events">Home</a></li>
-                        <li><a class="hover:text-gray-200" href="/addEvent">ADD Event</a></li>
                         <li><a class="hover:text-gray-200" href="/event">Events</a></li>
+                        <li><a class="hover:text-gray-200" href="/category">Categories</a></li>
 
-                    {{-- <li><a class="hover:text-gray-200" href="">Permissions</a></li>
-                    <li><a class="hover:text-gray-200" href="">Subscribers</a></li>
-                    <li><a class="hover:text-gray-200" href="">Templates</a></li> --}}
-                    <li><a class="hover:text-gray-200" href="/category">Categories</a></li>
-
+                      @endif
+                      @if(Auth::user()->hasRole('Administrateur'))
+                        <li><a class="hover:text-gray-200" href="/addEvent">ADD Event</a></li>
+                      @endif
+                      <li><a class="hover:text-gray-200" href="/events">Events</a></li>
                     </ul>
                     <!-- Header Icons -->
                     

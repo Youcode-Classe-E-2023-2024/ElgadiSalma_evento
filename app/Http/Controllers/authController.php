@@ -75,8 +75,15 @@ class authController extends Controller
         if (Auth::attempt($credentials, $request->filled('remember'))) {
             $request->session()->regenerate();
     
-                return redirect()->route('dashboard.view')->with('success', 'Vous êtes bien connecté ');
-                
+            $user = Auth::user();
+
+                if ($user->hasRole('Administrateur')) {
+                    return redirect()->route('dashboard.view');
+                } elseif ($user->hasRole('Organisateur')) {
+                    return redirect()->route('event.view');
+                } elseif (($user->hasRole('Utilisateur'))){
+                    return redirect()->route('event.view');
+                }                
             }        
         
     

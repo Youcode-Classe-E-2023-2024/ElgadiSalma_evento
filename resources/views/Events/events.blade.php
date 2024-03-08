@@ -2,10 +2,12 @@
 
 @section('content')
 
-<div class="py-16 sm:py-24 lg:mx-auto lg:max-w-7xl lg:px-8">
+<div class="py-16 sm:py-24 lg:mx-auto lg:max-w-7xl lg:px-8 min-h-screen">
     <div class="flex flex-wrap justify-center gap-5 w-full px-4 sm:px-6 lg:px-0">
 
-        @foreach($events as $event)
+      <h1 class="text-4xl text-blue-800 pb-20 text-center font-bold">Events</h1>
+
+        @forelse($events as $event)
 
         <div class="max-w-sm bg-white px-6 pt-6 pb-2 rounded-xl shadow-lg transform hover:scale-105 transition duration-500">
             <h3 class="mb-3 text-xl font-bold text-indigo-600">{{ $event->category->name }}</h3>
@@ -49,8 +51,9 @@
             </a>
             </div>
           </div>
-
-          @endforeach
+          @empty
+          <p>No events Found</p>
+          @endforelse
     </div>
 </div>
 
