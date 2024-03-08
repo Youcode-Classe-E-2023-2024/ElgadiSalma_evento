@@ -24,12 +24,14 @@ class dashboardController extends Controller
         $totalevents = event::count();
         $totalusers = user::count();
         $totalcategories = category::count();
+        $users = user::all();
 
         return view('Stats.dashboard', [
             'eventStatistics' => $eventStatistics,
             'totalevents' => $totalevents,
             'totalusers' => $totalusers,
-            'totalcategories' => $totalcategories
+            'totalcategories' => $totalcategories,
+            'users' => $users
         ]);
     }
 }

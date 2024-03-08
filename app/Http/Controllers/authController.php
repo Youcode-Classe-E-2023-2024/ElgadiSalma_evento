@@ -174,4 +174,17 @@ class authController extends Controller
         $user = Auth::user();
         return view('Auth.profil', compact('user'));
     }
+
+
+    // update role
+
+    function updateRole(Request $request) {
+        $user = User::find($request->userId);
+        $role = Role::find($request->idRole);
+
+        $user->removeRole($user->roles->first());
+        $user->assignRole($role);
+
+        return redirect()->route('dashboard.view');
+    }
 }

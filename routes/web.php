@@ -83,3 +83,11 @@ Route::delete('/event/{id}', [eventController::class,'desapprouveEvent'])->name(
 |--------------------------------------------------------------------------
 */
 Route::post('/reservation', [reservationController::class,'reserverEvent'])->name('reserver.event');
+
+
+/*
+|--------------------------------------------------------------------------
+|  Update role
+|--------------------------------------------------------------------------
+*/
+Route::put('/dashboard', [authController::class,'updateRole'])->name('role.edit');
