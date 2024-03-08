@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 use App\Mail\ForgotPasswordMail;
+use Spatie\Permission\Models\Role;
 
 class authController extends Controller
 {
@@ -25,7 +26,7 @@ class authController extends Controller
         $request->validate([
             'files' => 'required',
             'name' => 'required',
-            'role' => 'required',
+            'role' => 'required|in:Utilisateur,Organisateur',
             'email' => [
                 'required',
                 'email',
@@ -42,8 +43,11 @@ class authController extends Controller
             'id_picture' => $request->input('picture'),
         ]);
 
-        if (User::count() == 1) {
-            $user->role = '1';
+        $role = $request->input('role');
+        $roleModel = Role::where('name', $role)->first();
+
+        if ($roleModel) {
+            $user->assignRole($roleModel);
         }
 
         // Handle file upload

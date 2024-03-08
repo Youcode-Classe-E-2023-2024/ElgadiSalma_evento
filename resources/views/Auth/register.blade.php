@@ -34,6 +34,9 @@
                             <input class="pl-2 outline-none border-none" type="file" name="files[]" id="" placeholder="Photo de profil" />
                 </div>
 
+                @error('name')
+                    <span class="text-red-500">{{$message}}</span>
+                @enderror
                             <div class="flex items-center border-2 py-2 px-3 rounded-2xl mb-4">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none"
                                     viewBox="0 0 24 24" stroke="currentColor">
@@ -52,8 +55,8 @@
                                 </svg>
 
                                 <select name="role" id="" class="pl-2 outline-none border-none w-full text-gray-400">
-                                    <option class="text-black" value="3">Utilisateur</option>
-                                    <option class="text-black"   value="2">Administrateur</option>
+                                    <option class="text-black" value="Utilisateur">Utilisateur</option>
+                                    <option class="text-black"   value="Organisateur">Administrateur</option>
                                 </select>
                     </div>
                     
@@ -69,7 +72,9 @@
         
                                 <input class="pl-2 outline-none border-none w-full" type="email" name="email" id="" placeholder="Email" />
                 </div>
-            
+                @error('password')
+                <span class="text-red-500">{{$message}}</span>
+                @enderror
                                     <div class="flex items-center border-2 py-2 px-3 rounded-2xl">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20"
                                             fill="currentColor">
