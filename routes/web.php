@@ -20,7 +20,7 @@ Route::post('/register', [authController::class,'register'])->name('register');
 Route::get('/login', [authController::class,'loginView'])->name('login.show');
 Route::post('/login', [authController::class,'login'])->name('login');
 
-Route::post('/log', [authController::class,'logout'])->name('logout');
+Route::post('/logout', [authController::class,'logout'])->name('logout');
 
 Route::post('/forgot-password', [authController::class, 'forgot_password'])->name('forgot_password');
 Route::get('/forgot-password', [authController::class, 'forgot_show']);
@@ -30,33 +30,7 @@ Route::post('/reset-password/{token}', [authController::class, 'post_reset'])->n
 
 Route::get('/profil', [authController::class,'showProfil'])->name('profil');
 
-/*
-|--------------------------------------------------------------------------
-|  Dashboard admin
-|--------------------------------------------------------------------------
-*/
 
-Route::get('/dashboard', [dashboardController::class,'dashboardView'])->name('dashboard.view');
-
-
-/*
-|--------------------------------------------------------------------------
-|  Categories
-|--------------------------------------------------------------------------
-*/
-Route::get('/category', [categoryController::class,'categoryView'])->name('category.view');
-Route::post('/category', [categoryController::class,'addCategory'])->name('category.add');
-Route::put('/category', [categoryController::class,'editCategory'])->name('category.edit');
-Route::delete('/category', [categoryController::class,'deleteCategory'])->name('category.delete');
-
-
-/*
-|--------------------------------------------------------------------------
-|  addEvents
-|--------------------------------------------------------------------------
-*/
-Route::get('/addEvent', [eventController::class,'addEventView'])->name('addEvent.view');
-Route::post('/addEvent', [eventController::class,'addEvent'])->name('addEvent.add');
 
 /*
 |--------------------------------------------------------------------------
@@ -67,27 +41,76 @@ Route::get('/events', [eventController::class,'eventView'])->name('event.view');
 Route::get('/details/{id}', [eventController::class,'getEventById'])->name('event.details');
 
 
-/*
-|--------------------------------------------------------------------------
-|  Approuve Event cote admin
-|--------------------------------------------------------------------------
-*/
-Route::get('/event', [eventController::class,'adminEventView'])->name('adminEvent.view');
-Route::post('/event/{id}', [eventController::class,'approuveEvent'])->name('approuve.events');
-Route::delete('/event/{id}', [eventController::class,'desapprouveEvent'])->name('desapprouve.events');
-
 
 /*
 |--------------------------------------------------------------------------
-|  reserver event
+|  Check if authenticated
 |--------------------------------------------------------------------------
 */
-Route::post('/reservation', [reservationController::class,'reserverEvent'])->name('reserver.event');
+Route::middleware(['auth.check'])->group(function () 
+{
+
+    /*
+    |--------------------------------------------------------------------------
+    |  Update role
+    |--------------------------------------------------------------------------
+    */
+    Route::put('/dashboard', [authController::class,'updateRole'])->name('role.edit');
 
 
-/*
-|--------------------------------------------------------------------------
-|  Update role
-|--------------------------------------------------------------------------
-*/
-Route::put('/dashboard', [authController::class,'updateRole'])->name('role.edit');
+    /*
+    |--------------------------------------------------------------------------
+    |  Categories
+    |--------------------------------------------------------------------------
+    */
+    Route::get('/category', [categoryController::class,'categoryView'])->name('category.view');
+    Route::post('/category', [categoryController::class,'addCategory'])->name('category.add');
+    Route::put('/category', [categoryController::class,'editCategory'])->name('category.edit');
+    Route::delete('/category', [categoryController::class,'deleteCategory'])->name('category.delete');
+
+
+    /*
+    |--------------------------------------------------------------------------
+    |  addEvents
+    |--------------------------------------------------------------------------
+    */
+    Route::get('/addEvent', [eventController::class,'addEventView'])->name('addEvent.view');
+    Route::post('/addEvent', [eventController::class,'addEvent'])->name('addEvent.add');
+
+
+    /*
+    |--------------------------------------------------------------------------
+    |  reserver event
+    |--------------------------------------------------------------------------
+    */
+    Route::post('/reservation', [reservationController::class,'reserverEvent'])->name('reserver.event');
+
+
+    /*
+    |--------------------------------------------------------------------------
+    |  Approuve Event cote admin
+    |--------------------------------------------------------------------------
+    */
+    Route::get('/event', [eventController::class,'adminEventView'])->name('adminEvent.view');
+    Route::post('/event/{id}', [eventController::class,'approuveEvent'])->name('approuve.events');
+    Route::delete('/event/{id}', [eventController::class,'desapprouveEvent'])->name('desapprouve.events');
+
+
+    /*
+    |--------------------------------------------------------------------------
+    |  Dashboard admin
+    |--------------------------------------------------------------------------
+    */
+
+    Route::get('/dashboard', [dashboardController::class,'dashboardView'])->name('dashboard.view');
+
+
+    /*
+    |--------------------------------------------------------------------------
+    |  Show Profil
+    |--------------------------------------------------------------------------
+    */
+    Route::get('/profil', [authController::class,'showProfil'])->name('profil');
+
+
+});
