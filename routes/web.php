@@ -1,10 +1,11 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\authController;
-use App\Http\Controllers\dashboardController;
-use App\Http\Controllers\categoryController;
 use App\Http\Controllers\eventController;
+use App\Http\Controllers\categoryController;
+use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\reservationController;
 
 
@@ -50,24 +51,47 @@ Route::get('/details/{id}', [eventController::class,'getEventById'])->name('even
 Route::middleware(['auth.check'])->group(function () 
 {
 
-    /*
-    |--------------------------------------------------------------------------
-    |  Update role
-    |--------------------------------------------------------------------------
-    */
-    Route::put('/dashboard', [authController::class,'updateRole'])->name('role.edit');
+    Route::middleware(['admin.check'])->group(function () 
+    {
+        /*
+        |--------------------------------------------------------------------------
+        |  Categories
+        |--------------------------------------------------------------------------
+        */
+        Route::get('/category', [categoryController::class,'categoryView'])->name('category.view');
+        Route::post('/category', [categoryController::class,'addCategory'])->name('category.add');
+        Route::put('/category', [categoryController::class,'editCategory'])->name('category.edit');
+        Route::delete('/category', [categoryController::class,'deleteCategory'])->name('category.delete');
 
 
-    /*
-    |--------------------------------------------------------------------------
-    |  Categories
-    |--------------------------------------------------------------------------
-    */
-    Route::get('/category', [categoryController::class,'categoryView'])->name('category.view');
-    Route::post('/category', [categoryController::class,'addCategory'])->name('category.add');
-    Route::put('/category', [categoryController::class,'editCategory'])->name('category.edit');
-    Route::delete('/category', [categoryController::class,'deleteCategory'])->name('category.delete');
+        /*
+        |--------------------------------------------------------------------------
+        |  Update role
+        |--------------------------------------------------------------------------
+        */
+        Route::put('/dashboard', [authController::class,'updateRole'])->name('role.edit');
 
+
+
+        /*
+        |--------------------------------------------------------------------------
+        |  Approuve Event cote admin
+        |--------------------------------------------------------------------------
+        */
+        Route::get('/event', [eventController::class,'adminEventView'])->name('adminEvent.view');
+        Route::post('/event/{id}', [eventController::class,'approuveEvent'])->name('approuve.events');
+        Route::delete('/event/{id}', [eventController::class,'desapprouveEvent'])->name('desapprouve.events');
+
+
+
+        /*
+        |--------------------------------------------------------------------------
+        |  Dashboard admin
+        |--------------------------------------------------------------------------
+        */
+        Route::get('/dashboard', [dashboardController::class,'dashboardView'])->name('dashboard.view');
+
+    });
 
     /*
     |--------------------------------------------------------------------------
@@ -86,23 +110,6 @@ Route::middleware(['auth.check'])->group(function ()
     Route::post('/reservation', [reservationController::class,'reserverEvent'])->name('reserver.event');
 
 
-    /*
-    |--------------------------------------------------------------------------
-    |  Approuve Event cote admin
-    |--------------------------------------------------------------------------
-    */
-    Route::get('/event', [eventController::class,'adminEventView'])->name('adminEvent.view');
-    Route::post('/event/{id}', [eventController::class,'approuveEvent'])->name('approuve.events');
-    Route::delete('/event/{id}', [eventController::class,'desapprouveEvent'])->name('desapprouve.events');
-
-
-    /*
-    |--------------------------------------------------------------------------
-    |  Dashboard admin
-    |--------------------------------------------------------------------------
-    */
-
-    Route::get('/dashboard', [dashboardController::class,'dashboardView'])->name('dashboard.view');
 
 
     /*
