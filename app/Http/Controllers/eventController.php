@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Event;
 use App\Models\Lieu;
+use App\Models\User;
 use App\Models\Category;
 use App\Models\Reservation;
 use Illuminate\Support\Facades\Auth;
@@ -81,7 +82,13 @@ class eventController extends Controller
         {
             $placesRestantes = 1;
         }
-        return view('Events.details', compact('event','placesRestantes'));
+
+        $reservateurId = Reservation::where('event_id', $id)->where('status', 0)->pluck('user_id');
+
+        $reservateurs = User::whereIn('id', $reservateurId)->get();
+
+        // dd($reservateurs);
+        return view('Events.details', compact('event','placesRestantes','reservateurs'));
     }
 
 

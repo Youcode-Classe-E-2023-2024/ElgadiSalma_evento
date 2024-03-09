@@ -40,12 +40,51 @@ class reservationController extends Controller
         $users = User::find($user);
         // dd($users);
 
+        if($status == 1){
         $pdf = PDF::loadView('Events.ticket', compact('reservation','event','users'));
         $pdfPath = storage_path('app/public/temp/ticket_' . $reservation->id . '.pdf');
         $pdf->save($pdfPath);
 
         Mail::to($request->input('email'))->send(new ReservationMail($pdfPath));
-
-        return redirect()->route('event.view')->with('success', 'Evenement bien ajoutée.');
+        }
+        return redirect()->route('event.view')->with('success', 'Evenement bien ajoutee.');
     }
+
+    public function approuveReservation(Request $request)
+    {
+        $request->validate([
+            'eventId' => 'required',
+            'userId' => 'required',
+        ]);
+        
+        $eventId = $request->input('eventId');
+        $userId = $request->input('userId');
+        
+        $reservation = Reservation::where('event_id', $eventId)->where('user_id', $userId)->first();
+    
+        if ($reservation) {
+            $reservation->status = 1;
+            $reservation->save();
+    
+            return back()->with('success', 'La reservation est approuvee ');
+        } else {
+            return back()->with('error', 'Aucune reservation correspondante');
+        }
+    }
+
+    public function desapprouveReservation(Request $request)
+    {
+        $request->validate([
+            'eventId' => 'required',
+            'userId' => 'required',
+        ]);
+        
+        $eventId = $request->input('eventId');
+        $userId = $request->input('userId');
+        
+        Reservation::where('event_id', $eventId)->where('user_id', $userId)->delete();
+        return back()->with('success', 'La reservation est supprieme ');
+
+    }
+
 }

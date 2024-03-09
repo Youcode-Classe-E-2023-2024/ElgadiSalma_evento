@@ -38,7 +38,7 @@ Route::get('/profil', [authController::class,'showProfil'])->name('profil');
 |  displayEvent
 |--------------------------------------------------------------------------
 */
-Route::get('/   ', [eventController::class,'eventView'])->name('event.view');
+Route::get('/', [eventController::class,'eventView'])->name('event.view');
 Route::get('/details/{id}', [eventController::class,'getEventById'])->name('event.details');
 
 
@@ -110,6 +110,14 @@ Route::middleware(['auth.check'])->group(function ()
     Route::post('/reservation', [reservationController::class,'reserverEvent'])->name('reserver.event');
 
 
+
+    /*
+    |--------------------------------------------------------------------------
+    |  approuve decline reservateur
+    |--------------------------------------------------------------------------
+    */
+    Route::put('/reservation', [reservationController::class,'approuveReservation'])->name('approuve.reservateur');
+    Route::delete('/reservation', [reservationController::class,'desapprouveReservation'])->name('desapprouve.reservateur');
 
 
     /*
