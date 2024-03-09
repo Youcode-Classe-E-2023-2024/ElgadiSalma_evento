@@ -83,12 +83,20 @@ class eventController extends Controller
             $placesRestantes = 1;
         }
 
+        // stats
+        $reservationStatistics = Reservation::where('event_id', $id)
+        ->where('status', 1)
+        ->selectRaw('date(created_at) as date, count(*) as reservation_count')
+        ->groupBy('date')
+        ->get();
+
+
         $reservateurId = Reservation::where('event_id', $id)->where('status', 0)->pluck('user_id');
 
         $reservateurs = User::whereIn('id', $reservateurId)->get();
 
         // dd($reservateurs);
-        return view('Events.details', compact('event','placesRestantes','reservateurs'));
+        return view('Events.details', compact('event','placesRestantes','reservateurs', 'reservationStatistics'));
     }
 
 

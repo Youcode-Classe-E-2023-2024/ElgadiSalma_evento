@@ -144,11 +144,53 @@ use Carbon\Carbon;
               </ul>
           </div>
       </div>
+      <div class="flex flex-col items-center w-1/2">
+        <canvas id="reservationChart" class="w-full" height="150"></canvas>
       </div>
+    </div>
     @endif
           
         </main>
  
   </div>
 
+
+  <script>
+    const reservationStatistics = @json($reservationStatistics);
+
+    const dates = reservationStatistics.map(stat => stat.date);
+    const counts = reservationStatistics.map(stat => stat.reservation_count);
+
+    const ctx = document.getElementById('reservationChart').getContext('2d');
+    const eventChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: dates,
+            datasets: [{
+                label: 'Nombre de réservations approuvées',
+                data: counts,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Date'
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Nombre de réservations'
+                    }
+                }
+            }
+        }
+    });
+</script>
 @endsection
