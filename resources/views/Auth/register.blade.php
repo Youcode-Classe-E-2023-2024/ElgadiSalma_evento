@@ -56,7 +56,7 @@
 
                                 <select name="role" id="" class="pl-2 outline-none border-none w-full text-gray-400">
                                     <option class="text-black" value="Utilisateur">Utilisateur</option>
-                                    <option class="text-black"   value="Organisateur">Administrateur</option>
+                                    <option class="text-black"   value="Organisateur">Organisateur</option>
                                 </select>
                     </div>
                     

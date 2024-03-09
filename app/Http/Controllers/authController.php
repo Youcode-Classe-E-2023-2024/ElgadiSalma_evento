@@ -39,7 +39,6 @@ class authController extends Controller
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'password' => $request->input('password'),
-            'role' => $request->input('role'),
             'id_picture' => $request->input('picture'),
         ]);
 

@@ -38,7 +38,7 @@ Route::get('/profil', [authController::class,'showProfil'])->name('profil');
 |  displayEvent
 |--------------------------------------------------------------------------
 */
-Route::get('/events', [eventController::class,'eventView'])->name('event.view');
+Route::get('/   ', [eventController::class,'eventView'])->name('event.view');
 Route::get('/details/{id}', [eventController::class,'getEventById'])->name('event.details');
 
 
