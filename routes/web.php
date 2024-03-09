@@ -102,6 +102,18 @@ Route::middleware(['auth.check'])->group(function ()
     Route::post('/addEvent', [eventController::class,'addEvent'])->name('addEvent.add');
 
 
+
+    /*
+    |--------------------------------------------------------------------------
+    |  myEvents
+    |--------------------------------------------------------------------------
+    */
+    Route::get('/myEvents', [eventController::class,'myEventView'])->name('myEvent.view');
+    // Route::post('/addEvent', [eventController::class,'addEvent'])->name('addEvent.add');
+    Route::delete('/deleteEvent', [eventController::class,'deleteEvent'])->name('delete.event');
+
+
+
     /*
     |--------------------------------------------------------------------------
     |  reserver event

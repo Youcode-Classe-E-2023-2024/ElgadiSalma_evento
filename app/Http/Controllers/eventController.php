@@ -99,6 +99,28 @@ class eventController extends Controller
         return view('Events.details', compact('event','placesRestantes','reservateurs', 'reservationStatistics'));
     }
 
+    public function myEventView()
+    {
+        $me = Auth::user();
+        $events = Event::with('category', 'city', 'createdBy')->where('status', 1)->where('created_by', $me->id)->get();
+        // dd($events->);
+        return view('Events.myEvents', compact('events'));
+    }
+
+    public function deleteEvent(Request $request)
+    {
+        $me = Auth::user();
+        $request->validate([
+            'eventId' => 'required',
+        ]);
+
+        $eventId = $request->input('eventId');
+        Event::where('id', $eventId)->where('created_by', $me->id)->delete();
+
+        return back()->with('success', 'Levent est supprieme ');
+
+    }
+
 
     /*
     |--------------------------------------------------------------------------

@@ -37,7 +37,8 @@
                         <li><a class="hover:text-gray-200" href="/category">Categories</a></li>
                       @endrole
                       @role('Organisateur')
-                        <li><a class="hover:text-gray-200" href="/addEvent">ADD Event</a></li>
+                      <li><a class="hover:text-gray-200" href="/addEvent">ADD Event</a></li>
+                      <li><a class="hover:text-gray-200" href="/myEvents">My Events</a></li>
                       @endrole
                       <li><a class="hover:text-gray-200" href="/">Home</a></li>
                     </ul>
