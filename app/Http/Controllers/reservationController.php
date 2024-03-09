@@ -6,6 +6,7 @@ use App\Mail\reservationMail;
 use Illuminate\Http\Request;
 use App\Models\Event;
 use App\Models\User;
+use App\Models\Category;
 use App\Models\Reservation;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
@@ -66,8 +67,19 @@ class reservationController extends Controller
             $reservation->status = 1;
             $reservation->save();
     
+            $event = Event::with('category', 'city', 'createdBy')->find($request->input('eventId'));
+
+            $users = User::find($userId);
+            $pdf = PDF::loadView('Events.ticket', compact('reservation','event','users'));
+            $pdfPath = storage_path('app/public/temp/ticket_' . $reservation->id . '.pdf');
+            $pdf->save($pdfPath);
+
+            Mail::to($reservation->email)->send(new ReservationMail($pdfPath));
+
             return back()->with('success', 'La reservation est approuvee ');
-        } else {
+        } 
+        else 
+        {
             return back()->with('error', 'Aucune reservation correspondante');
         }
     }
