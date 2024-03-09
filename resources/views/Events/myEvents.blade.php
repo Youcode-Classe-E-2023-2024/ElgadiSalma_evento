@@ -47,7 +47,9 @@
                 <p>{{ $event->city->ville }}</p>
               </div>
               <div class="w-full flex gap-2">
-                <button class="mt-4 text-xl w-1/2 text-white bg-blue-800 py-2 hover:bg-green-400 rounded-xl shadow-lg">Edit</button>
+                <a href="edit/{{ $event->id }}" class="w-1/2 bg-blue-800 mt-4 text-xl text-white py-2 hover:bg-green-400 rounded-xl shadow-lg">
+                    <button class="w-full">Edit</button>
+                </a>
                 <form action="{{ route('delete.event') }}" method="POST" class="w-1/2 bg-blue-800 mt-4 text-xl text-white py-2 hover:bg-red-400 rounded-xl shadow-lg">
                     @csrf
                     @method('DELETE')

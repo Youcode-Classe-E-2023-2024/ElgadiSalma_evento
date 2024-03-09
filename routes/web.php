@@ -109,8 +109,9 @@ Route::middleware(['auth.check'])->group(function ()
     |--------------------------------------------------------------------------
     */
     Route::get('/myEvents', [eventController::class,'myEventView'])->name('myEvent.view');
-    // Route::post('/addEvent', [eventController::class,'addEvent'])->name('addEvent.add');
+    Route::get('/edit/{id}', [eventController::class,'editView'])->name('edit.view');
     Route::delete('/deleteEvent', [eventController::class,'deleteEvent'])->name('delete.event');
+    Route::post('/edit/{id}', [eventController::class,'editEvent'])->name('event.edit');
 
 
 

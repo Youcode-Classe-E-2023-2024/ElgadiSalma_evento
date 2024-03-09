@@ -121,7 +121,56 @@ class eventController extends Controller
 
     }
 
+    public function editView($id)
+    {
+        $categories = Category::all();
+        $cities = Lieu::all();
+        $event = Event::with('category', 'city', 'createdBy')->find($id);
+        $me = Auth::user();
 
+        if($event->created_by == $me->id){
+        return view('Events.edit', compact('event','categories', 'cities'));
+        }
+        else{
+            abort('404');
+        }
+    }
+
+    public function editEvent(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'title' => 'required',
+            'description' => 'required',
+            'price' => 'required',
+            'place' => 'required',
+            'lieu' => 'required',
+            'category' => 'required',
+            'deadline' => 'required',
+        ]);
+        // dd($validator);
+    
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+    
+        $event = Event::findOrFail($id);
+    
+        $acceptation = $request->has('validation') ? 1 : 0;
+    
+        $event->update([
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+            'price' => $request->input('price'),
+            'nombre_place' => $request->input('place'),
+            'ville_id' => $request->input('lieu'),
+            'category_id' => $request->input('category'),
+            'deadline' => $request->input('deadline'),
+            'acceptation' => $acceptation,
+        ]);
+    
+        return redirect()->route('myEvent.view')->with('success', 'Événement mis à jour avec succès.');
+    }
+    
     /*
     |--------------------------------------------------------------------------
     |  Admin
