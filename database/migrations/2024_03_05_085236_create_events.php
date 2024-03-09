@@ -24,6 +24,7 @@ return new class extends Migration
             $table->bigInteger('nombre_place');
             $table->bigInteger('category_id');
             $table->string('deadline');
+            $table->softDeletes();
             $table->timestamps();
 
             $table->foreign('ville_id')->references('id')->on('lieu')->onDelete('cascade');
