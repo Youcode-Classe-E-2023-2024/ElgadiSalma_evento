@@ -3,9 +3,9 @@
 @section('content')
 
 <div class="py-16 sm:py-24 lg:mx-auto lg:max-w-7xl lg:px-8 min-h-screen">
-    <div class="flex flex-wrap justify-center gap-5 w-full px-4 sm:px-6 lg:px-0">
+  <h1 class="text-4xl text-blue-800 pb-16 text-center font-bold">Events</h1>
 
-      <h1 class="text-4xl text-blue-800 pb-20 text-center font-bold">Events</h1>
+    <div class="flex flex-wrap justify-center gap-5 w-full px-4 sm:px-6 lg:px-0">
 
         @forelse($events as $event)
 

@@ -39,7 +39,7 @@
                       @role('Organisateur')
                         <li><a class="hover:text-gray-200" href="/addEvent">ADD Event</a></li>
                       @endrole
-                      <li><a class="hover:text-gray-200" href="/events">Events</a></li>
+                      <li><a class="hover:text-gray-200" href="/">Home</a></li>
                     </ul>
                     <!-- Header Icons -->
                     

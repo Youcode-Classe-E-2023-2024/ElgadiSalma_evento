@@ -28,7 +28,7 @@ use Carbon\Carbon;
 
                     </div>
                     <h1 class="text-3xl font-semibold">{{ $event->title }}</h1>
-                    <p class="flex-1 pt-2">{{ $event->description }}</p>
+                    <input class="flex-1 pt-2" placeholder="{{ $event->description }}"/>
                     <a rel="noopener noreferrer" href="details/{{ $event->id }}" class="inline-flex items-center pt-2 pb-6 space-x-2 text-sm dark:text-violet-400">
                         <span>Read more</span>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">
