@@ -10,5 +10,6 @@
             <p class="text-center text-gray-600 mt-1">{{ $user['email'] }}</p>
         
     </div>
-  </main>*
+  </main>
   @endsection
+
