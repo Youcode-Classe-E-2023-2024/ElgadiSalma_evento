@@ -59,7 +59,7 @@ class authController extends Controller
             $user->save();
         }
 
-        return view('Auth.register');
+        return view('Auth.login');
     }
 
 
