@@ -127,7 +127,7 @@
                                 <option value="2">Organisateur</option>
                                 <option value="3">Utilisateur</option>
                             </select>
-                            <button type="submit" name="supprimer" class="bg-black rounded-md px-5 py-2 font-semibold text-gray-500 duration-75 hover:bg-gray-700 hover:text-purple-100">edit</button>
+                            <button type="submit" name="supprimer" class="bg-black w-full rounded-md px-5 py-2 font-semibold text-gray-500 duration-75 hover:bg-gray-700 hover:text-purple-100">edit</button>
                         </form>
                     </div>
                 </li>

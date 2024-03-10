@@ -103,8 +103,21 @@ class eventController extends Controller
     {
         $me = Auth::user();
         $events = Event::with('category', 'city', 'createdBy')->where('status', 1)->where('created_by', $me->id)->get();
+        $categories = Category::all();
         // dd($events->);
-        return view('Events.myEvents', compact('events'));
+        return view('Events.myEvents', compact('events','categories'));
+    }
+    public function searchMyEvent(Request $request)
+    {
+        $query = $request->input('query');
+
+        $categories = Category::all();
+
+        $me = Auth::user();
+
+        $events = Event::where('title', 'like', '%' . $query . '%')->where('created_by', $me->id)->get();
+
+        return view('Events.myEvents', compact('events','categories'));
     }
 
     public function deleteEvent(Request $request)

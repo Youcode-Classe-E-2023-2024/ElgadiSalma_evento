@@ -150,7 +150,7 @@
           </div>
 
         <div class="my-10">
-          <button type="submit" name="submit" class="hover:shadow-form rounded-md bg-gray-100 py-3 px-8 text-center text-base font-semibold w-full border-2 outline-none">
+          <button type="submit" name="submit" class="hover:shadow-form rounded-md bg-gray-700 py-3 px-8 text-center text-base font-semibold w-full border-2 outline-none">
             Submit
           </button>
         </div>

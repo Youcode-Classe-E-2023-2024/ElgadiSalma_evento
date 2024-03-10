@@ -112,6 +112,7 @@ Route::middleware(['auth.check'])->group(function ()
     Route::get('/edit/{id}', [eventController::class,'editView'])->name('edit.view');
     Route::delete('/deleteEvent', [eventController::class,'deleteEvent'])->name('delete.event');
     Route::post('/edit/{id}', [eventController::class,'editEvent'])->name('event.edit');
+    Route::get('/search', [EventController::class, 'searchMyEvent'])->name('event.search');
 
 
 
