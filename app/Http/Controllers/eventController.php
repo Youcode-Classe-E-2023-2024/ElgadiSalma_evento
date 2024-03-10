@@ -68,7 +68,7 @@ class eventController extends Controller
     {        
         $categories = Category::all();
 
-        $events = Event::with('category', 'city', 'createdBy')->where('status', 1)->get();
+        $events = Event::with('category', 'city', 'createdBy')->where('status', 1)->paginate(6, ['*'], 'categories');
         // dd($events->);
         return view('Events.events', compact('events','categories'));
     }
@@ -104,7 +104,10 @@ class eventController extends Controller
     public function myEventView()
     {
         $me = Auth::user();
-        $events = Event::with('category', 'city', 'createdBy')->where('status', 1)->where('created_by', $me->id)->get();
+        $events = Event::with('category', 'city', 'createdBy')
+        ->where('status', 1)
+        ->where('created_by', $me->id)
+        ->paginate(6, ['*'], 'categories');        
         $categories = Category::all();
         // dd($events->);
         return view('Events.myEvents', compact('events','categories'));

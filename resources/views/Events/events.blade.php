@@ -97,6 +97,9 @@
           <p>No events Found</p>
           @endforelse
     </div>
+    <div class="flex justify-center pt-10">
+      {{ $events->links() }}
+    </div>
 </div>
 
 @endsection
