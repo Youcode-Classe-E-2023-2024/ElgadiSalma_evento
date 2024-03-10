@@ -39,6 +39,8 @@ Route::get('/profil', [authController::class,'showProfil'])->name('profil');
 |--------------------------------------------------------------------------
 */
 Route::get('/', [eventController::class,'eventView'])->name('event.view');
+Route::get('/searchs', [EventController::class, 'searchEvent'])->name('event.search');
+Route::get('/filters', [EventController::class, 'filterEvent'])->name('event.filter');
 Route::get('/details/{id}', [eventController::class,'getEventById'])->name('event.details');
 
 
@@ -112,7 +114,8 @@ Route::middleware(['auth.check'])->group(function ()
     Route::get('/edit/{id}', [eventController::class,'editView'])->name('edit.view');
     Route::delete('/deleteEvent', [eventController::class,'deleteEvent'])->name('delete.event');
     Route::post('/edit/{id}', [eventController::class,'editEvent'])->name('event.edit');
-    Route::get('/search', [EventController::class, 'searchMyEvent'])->name('event.search');
+    Route::get('/search', [EventController::class, 'searchMyEvent'])->name('myEvent.search');
+    Route::get('/filter', [EventController::class, 'filterMyEvent'])->name('myEvent.filter');
 
 
 

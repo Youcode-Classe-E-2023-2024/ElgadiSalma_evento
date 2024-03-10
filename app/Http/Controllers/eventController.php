@@ -65,10 +65,12 @@ class eventController extends Controller
         return redirect()->route('addEvent.view')->with('success', 'Evenement bien ajoutée.');
     }
     public function eventView()
-    {
+    {        
+        $categories = Category::all();
+
         $events = Event::with('category', 'city', 'createdBy')->where('status', 1)->get();
         // dd($events->);
-        return view('Events.events', compact('events'));
+        return view('Events.events', compact('events','categories'));
     }
 
     public function getEventById($id)
@@ -109,6 +111,14 @@ class eventController extends Controller
     }
     public function searchMyEvent(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'query' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('myEvent.view');
+        }
+
         $query = $request->input('query');
 
         $categories = Category::all();
@@ -118,6 +128,57 @@ class eventController extends Controller
         $events = Event::where('title', 'like', '%' . $query . '%')->where('created_by', $me->id)->get();
 
         return view('Events.myEvents', compact('events','categories'));
+    }
+
+    public function searchEvent(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'query' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('event.view');
+        }
+
+        $query = $request->input('query');
+
+        $categories = Category::all();
+
+        $me = Auth::user();
+
+        $events = Event::where('title', 'like', '%' . $query . '%')->where('created_by', $me->id)->get();
+
+        return view('Events.events', compact('events','categories'));
+    }
+
+    public function filterMyEvent(Request $request)
+    {
+        $categoryId = $request->input('category');
+        $me = Auth::user();
+        $categories = Category::all();
+
+        if ($categoryId == 'all') {
+            $events = Event::all();
+        } else {
+            $events = Event::where('category_id', $categoryId)->where('created_by', $me->id)->get();
+        }
+
+        return view('Events.myEvents', compact('events','categories'));
+    }
+
+    public function filterEvent(Request $request)
+    {
+        $categoryId = $request->input('category');
+        $me = Auth::user();
+        $categories = Category::all();
+
+        if ($categoryId == 'all') {
+            $events = Event::all();
+        } else {
+            $events = Event::where('category_id', $categoryId)->where('created_by', $me->id)->get();
+        }
+
+        return view('Events.events', compact('events','categories'));
     }
 
     public function deleteEvent(Request $request)

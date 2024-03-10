@@ -6,7 +6,49 @@
   <h1 class="text-4xl text-blue-800 pb-16 text-center font-bold">Events</h1>
 
     <div class="flex flex-wrap justify-center gap-5 w-full px-4 sm:px-6 lg:px-0">
+      <form action="{{ route('event.search') }}" method="GET" class="flex w-full gap-4 justify-center">
+        <div class="relative w-1/2">
+            <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+                <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
+            </div>
+            <input type="text" name="query" id="searchInput" class="bg-gray-50 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search" >
+        </div>
+        <button type="submit">
+          <span class="circle1"></span>
+          <span class="circle2"></span>
+          <span class="circle3"></span>
+          <span class="circle4"></span>
+          <span class="circle5"></span>
+          <span class="text">Search</span>
+        </button>
+      </form>
 
+        <form action="{{ route('event.filter') }}" method="GET" class="w-full">
+        <div class="search w-full">
+            <div class="select">
+              <div class="select">
+                <select name="category" id="category">
+                    <option value="all" selected>Category</option>
+                    @forelse($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @empty
+                    <p>No categories Found</p>
+                    @endforelse
+                </select>
+            </div>
+            </div>
+            <div class="">
+              <button>
+                <span class="circle1"></span>
+                <span class="circle2"></span>
+                <span class="circle3"></span>
+                <span class="circle4"></span>
+                <span class="circle5"></span>
+                <span class="text">Submit</span>
+            </button>
+            </div>
+        </div>
+      </form>
         @forelse($events as $event)
 
         <div class="max-w-sm bg-white px-6 pt-6 pb-2 rounded-xl shadow-lg transform hover:scale-105 transition duration-500">
