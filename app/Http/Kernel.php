@@ -72,5 +72,6 @@ class Kernel extends HttpKernel
         // ...
         'auth.check' => \App\Http\Middleware\AuthCheck::class,
         'admin.check' => \App\Http\Middleware\adminCheck::class,
+        'organiser.check' => \App\Http\Middleware\adminCheck::class,
     ];
 }

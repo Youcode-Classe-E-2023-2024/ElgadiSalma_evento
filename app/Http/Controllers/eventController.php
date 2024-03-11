@@ -62,7 +62,7 @@ class eventController extends Controller
             $event->save();
         }
 
-        return redirect()->route('addEvent.view')->with('success', 'Evenement bien ajoutée.');
+        return redirect()->route('myEvent.view')->with('success', 'Evenement bien ajoutée.');
     }
     public function eventView()
     {        
@@ -105,7 +105,6 @@ class eventController extends Controller
     {
         $me = Auth::user();
         $events = Event::with('category', 'city', 'createdBy')
-        ->where('status', 1)
         ->where('created_by', $me->id)
         ->paginate(6, ['*'], 'categories');        
         $categories = Category::all();

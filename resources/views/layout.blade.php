@@ -17,7 +17,7 @@
         <!-- Styles -->
         <style>
           /* btn search */
-          button {
+          .botona {
             font-family: Arial, Helvetica, sans-serif;
             font-weight: bold;
             color: white;
@@ -30,7 +30,7 @@
             overflow: hidden;
           }
 
-          button span:not(:nth-child(6)) {
+          .botona span:not(:nth-child(6)) {
             position: absolute;
             left: 50%;
             top: 50%;
@@ -42,31 +42,31 @@
             transition: .6s ease;
           }
 
-          button span:nth-child(6) {
+          .botona span:nth-child(6) {
             position: relative;
           }
 
-          button span:nth-child(1) {
+          .botona span:nth-child(1) {
             transform: translate(-3.3em, -4em);
           }
 
-          button span:nth-child(2) {
+          .botona span:nth-child(2) {
             transform: translate(-6em, 1.3em);
           }
 
-          button span:nth-child(3) {
+          .botona span:nth-child(3) {
             transform: translate(-.2em, 1.8em);
           }
 
-          button span:nth-child(4) {
+          .botona span:nth-child(4) {
             transform: translate(3.5em, 1.4em);
           }
 
-          button span:nth-child(5) {
+          .botona span:nth-child(5) {
             transform: translate(3.5em, -3.8em);
           }
 
-          button:hover span:not(:nth-child(6)) {
+          .botona:hover span:not(:nth-child(6)) {
             transform: translate(-50%, -50%) scale(4);
             transition: 1.5s ease;
           }
@@ -185,6 +185,7 @@
                     </a>
                     @auth
                     <ul class="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
+                      <li><a class="hover:text-gray-200" href="/">Home</a></li>
                       @role('Administrateur')                        
                         <li><a class="hover:text-gray-200" href="/dashboard">Dashboard</a></li>
                         <li><a class="hover:text-gray-200" href="/event">Events</a></li>
@@ -194,7 +195,6 @@
                       <li><a class="hover:text-gray-200" href="/addEvent">ADD Event</a></li>
                       <li><a class="hover:text-gray-200" href="/myEvents">My Events</a></li>
                       @endrole
-                      <li><a class="hover:text-gray-200" href="/">Home</a></li>
                     </ul>
                     <!-- Header Icons -->
                     

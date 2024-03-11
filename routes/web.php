@@ -29,8 +29,6 @@ Route::get('/forgot-password', [authController::class, 'forgot_show']);
 Route::get('/reset-password/{token}', [authController::class, 'reset'])->name('reset');
 Route::post('/reset-password/{token}', [authController::class, 'post_reset'])->name('post_reset');
 
-Route::get('/profil', [authController::class,'showProfil'])->name('profil');
-
 
 
 /*
@@ -95,28 +93,43 @@ Route::middleware(['auth.check'])->group(function ()
 
     });
 
-    /*
-    |--------------------------------------------------------------------------
-    |  addEvents
-    |--------------------------------------------------------------------------
-    */
-    Route::get('/addEvent', [eventController::class,'addEventView'])->name('addEvent.view');
-    Route::post('/addEvent', [eventController::class,'addEvent'])->name('addEvent.add');
+
+    Route::middleware(['organiser.check'])->group(function () 
+    {
+
+        /*
+        |--------------------------------------------------------------------------
+        |  addEvents
+        |--------------------------------------------------------------------------
+        */
+        Route::get('/addEvent', [eventController::class,'addEventView'])->name('addEvent.view');
+        Route::post('/addEvent', [eventController::class,'addEvent'])->name('addEvent.add');
 
 
 
-    /*
-    |--------------------------------------------------------------------------
-    |  myEvents
-    |--------------------------------------------------------------------------
-    */
-    Route::get('/myEvents', [eventController::class,'myEventView'])->name('myEvent.view');
-    Route::get('/edit/{id}', [eventController::class,'editView'])->name('edit.view');
-    Route::delete('/deleteEvent', [eventController::class,'deleteEvent'])->name('delete.event');
-    Route::post('/edit/{id}', [eventController::class,'editEvent'])->name('event.edit');
-    Route::get('/search', [EventController::class, 'searchMyEvent'])->name('myEvent.search');
-    Route::get('/filter', [EventController::class, 'filterMyEvent'])->name('myEvent.filter');
+        /*
+        |--------------------------------------------------------------------------
+        |  myEvents
+        |--------------------------------------------------------------------------
+        */
+        Route::get('/myEvents', [eventController::class,'myEventView'])->name('myEvent.view');
+        Route::get('/edit/{id}', [eventController::class,'editView'])->name('edit.view');
+        Route::delete('/deleteEvent', [eventController::class,'deleteEvent'])->name('delete.event');
+        Route::post('/edit/{id}', [eventController::class,'editEvent'])->name('event.edit');
+        Route::get('/search', [EventController::class, 'searchMyEvent'])->name('myEvent.search');
+        Route::get('/filter', [EventController::class, 'filterMyEvent'])->name('myEvent.filter');
+        
 
+
+        /*
+        |--------------------------------------------------------------------------
+        |  approuve decline reservateur
+        |--------------------------------------------------------------------------
+        */
+        Route::put('/reservation', [reservationController::class,'approuveReservation'])->name('approuve.reservateur');
+        Route::delete('/reservation', [reservationController::class,'desapprouveReservation'])->name('desapprouve.reservateur');
+
+    });
 
 
     /*
@@ -125,16 +138,6 @@ Route::middleware(['auth.check'])->group(function ()
     |--------------------------------------------------------------------------
     */
     Route::post('/reservation', [reservationController::class,'reserverEvent'])->name('reserver.event');
-
-
-
-    /*
-    |--------------------------------------------------------------------------
-    |  approuve decline reservateur
-    |--------------------------------------------------------------------------
-    */
-    Route::put('/reservation', [reservationController::class,'approuveReservation'])->name('approuve.reservateur');
-    Route::delete('/reservation', [reservationController::class,'desapprouveReservation'])->name('desapprouve.reservateur');
 
 
     /*

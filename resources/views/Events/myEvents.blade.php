@@ -13,7 +13,7 @@
             </div>
             <input type="text" name="query" id="searchInput" class="bg-gray-50 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 py-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search" >
         </div>
-        <button type="submit">
+        <button type="submit" class="botona">
           <span class="circle1"></span>
           <span class="circle2"></span>
           <span class="circle3"></span>
@@ -38,7 +38,7 @@
             </div>
             </div>
             <div class="">
-              <button>
+              <button class="botona">
                 <span class="circle1"></span>
                 <span class="circle2"></span>
                 <span class="circle3"></span>
